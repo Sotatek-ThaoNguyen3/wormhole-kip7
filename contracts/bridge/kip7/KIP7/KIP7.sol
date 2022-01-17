@@ -25,7 +25,7 @@ import "./IKIP7Receiver.sol";
  * See http://kips.klaytn.com/KIPs/kip-7-fungible_token
  */
 contract KIP7 is KIP13, IKIP7 {
-    using Address for address;
+    using AddressForKip7 for address;
     // Equals to `bytes4(keccak256("onKIP7Received(address,address,uint256,bytes)"))`
     // which can be also obtained as `IKIP7Receiver(0).onKIP7Received.selector`
     bytes4 private constant _KIP7_RECEIVED = 0x9d188c22;
