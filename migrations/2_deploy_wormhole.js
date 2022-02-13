@@ -5,7 +5,7 @@ const Implementation = artifacts.require("Implementation");
 const Wormhole = artifacts.require("Wormhole");
 
 // CONFIG
-const initialSigners = process.env.INIT_SIGNERS.split(' ');
+const initialSigners = JSON.parse(process.env.INIT_SIGNERS);
 const chainId = process.env.INIT_CHAIN_ID;
 const governanceChainId = process.env.INIT_GOV_CHAIN_ID;
 const governanceContract = process.env.INIT_GOV_CONTRACT; // bytes32

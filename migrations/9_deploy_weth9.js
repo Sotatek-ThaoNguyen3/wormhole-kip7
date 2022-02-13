@@ -1,5 +1,5 @@
-var WETH9 = artifacts.require("MockWETH9");
+var WKLAYTN9 = artifacts.require("MockWKLAYTN9");
 
 module.exports = function(deployer) {
-    deployer.deploy(WETH9);
+    deployer.deploy(WKLAYTN9);
 };

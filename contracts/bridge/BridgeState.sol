@@ -10,7 +10,7 @@ contract BridgeStorage {
         uint16 chainId;
         uint16 governanceChainId;
         bytes32 governanceContract;
-        address WETH;
+        address WKLAYTN;
     }
 
     struct Asset {

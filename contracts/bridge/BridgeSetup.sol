@@ -16,7 +16,7 @@ contract BridgeSetup is BridgeSetters, ERC1967Upgrade {
         uint16 governanceChainId,
         bytes32 governanceContract,
         address tokenImplementation,
-        address WETH
+        address WKLAYTN
     ) public {
         setChainId(chainId);
 
@@ -27,7 +27,7 @@ contract BridgeSetup is BridgeSetters, ERC1967Upgrade {
 
         setTokenImplementation(tokenImplementation);
 
-        setWETH(WETH);
+        setWKLAYTN(WKLAYTN);
 
         _upgradeTo(implementation);
     }

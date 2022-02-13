@@ -14,7 +14,7 @@ contract MockBridgeImplementation is BridgeImplementation {
         return true;
     }
 
-    function testUpdateWETHAddress(address WETH) external {
-        setWETH(WETH);
+    function testUpdateWKLAYTNAddress(address WKLAYTN) external {
+        setWKLAYTN(WKLAYTN);
     }
 }

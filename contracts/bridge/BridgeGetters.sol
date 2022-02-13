@@ -51,8 +51,8 @@ contract BridgeGetters is BridgeState {
         return _state.tokenImplementation;
     }
 
-    function WETH() public view returns (IWETH){
-        return IWETH(_state.provider.WETH);
+    function WKLAYTN() public view returns (IWKLAYTN){
+        return IWKLAYTN(_state.provider.WKLAYTN);
     }
 
     function outstandingBridged(address token) public view returns (uint256){
@@ -64,7 +64,7 @@ contract BridgeGetters is BridgeState {
     }
 }
 
-interface IWETH is IKIP7 {
+interface IWKLAYTN is IKIP7 {
     function deposit() external payable;
 
     function withdraw(uint amount) external;

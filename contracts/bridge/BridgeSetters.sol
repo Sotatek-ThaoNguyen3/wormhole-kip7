@@ -38,8 +38,8 @@ contract BridgeSetters is BridgeState {
         _state.tokenImplementation = impl;
     }
 
-    function setWETH(address weth) internal {
-        _state.provider.WETH = weth;
+    function setWKLAYTN(address WKLAYTN) internal {
+        _state.provider.WKLAYTN = WKLAYTN;
     }
 
     function setWormhole(address wh) internal {

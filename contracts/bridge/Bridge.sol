@@ -83,15 +83,15 @@ contract Bridge is BridgeGovernance {
             payable(msg.sender).transfer(dust);
         }
 
-        // deposit into WETH
-        WETH().deposit{
+        // deposit into WKLAYTN
+        WKLAYTN().deposit{
             value : amount - dust
         }();
 
         // track and check outstanding token amounts
-        bridgeOut(address(WETH()), normalizedAmount);
+        bridgeOut(address(WKLAYTN()), normalizedAmount);
 
-        sequence = logTransfer(chainId(), bytes32(uint256(uint160(address(WETH())))), normalizedAmount, recipientChain, recipient, normalizedArbiterFee, wormholeFee, nonce);
+        sequence = logTransfer(chainId(), bytes32(uint256(uint160(address(WKLAYTN())))), normalizedAmount, recipientChain, recipient, normalizedArbiterFee, wormholeFee, nonce);
     }
 
     // Initiate a Transfer
@@ -257,7 +257,7 @@ contract Bridge is BridgeGovernance {
     }
 
     // Execute a Transfer message
-    function _completeTransfer(bytes memory encodedVm, bool unwrapWETH) internal {
+    function _completeTransfer(bytes memory encodedVm, bool unwrapWKLAYTN) internal {
         (IWormhole.VM memory vm, bool valid, string memory reason) = wormhole().parseAndVerifyVM(encodedVm);
 
         require(valid, reason);
@@ -283,7 +283,7 @@ contract Bridge is BridgeGovernance {
             transferToken = IKIP7(wrapped);
         }
 
-        require(unwrapWETH == false || address(transferToken) == address(WETH()), "invalid token, can only unwrap WETH");
+        require(unwrapWKLAYTN == false || address(transferToken) == address(WKLAYTN()), "invalid token, can only unwrap WKLAYTN");
 
         // query decimals
         (,bytes memory queriedDecimals) = address(transferToken).staticcall(abi.encodeWithSignature("decimals()"));
@@ -297,8 +297,8 @@ contract Bridge is BridgeGovernance {
         if (nativeFee > 0) {
             require(nativeFee <= nativeAmount, "fee higher than transferred amount");
 
-            if (unwrapWETH) {
-                WETH().withdraw(nativeFee);
+            if (unwrapWKLAYTN) {
+                WKLAYTN().withdraw(nativeFee);
 
                 payable(msg.sender).transfer(nativeFee);
             } else {
@@ -315,8 +315,8 @@ contract Bridge is BridgeGovernance {
         uint transferAmount = nativeAmount - nativeFee;
         address transferRecipient = address(uint160(uint256(transfer.to)));
 
-        if (unwrapWETH) {
-            WETH().withdraw(transferAmount);
+        if (unwrapWKLAYTN) {
+            WKLAYTN().withdraw(transferAmount);
 
             payable(transferRecipient).transfer(transferAmount);
         } else {
@@ -437,6 +437,6 @@ contract Bridge is BridgeGovernance {
         return string(array);
     }
 
-    // we need to accept ETH sends to unwrap WETH
+    // we need to accept ETH sends to unwrap WKLAYTN
     receive() external payable {}
 }

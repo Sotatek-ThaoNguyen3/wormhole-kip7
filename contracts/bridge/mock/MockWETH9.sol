@@ -15,9 +15,9 @@
 
 pragma solidity ^0.8.0;
 
-contract MockWETH9 {
-    string public name     = "Wrapped Ether";
-    string public symbol   = "WETH";
+contract MockWKLAYTN9 {
+    string public name     = "Wrapped KlayTN";
+    string public symbol   = "WKLAYTN";
     uint8  public decimals = 18;
 
     event  Approval(address indexed src, address indexed guy, uint wad);
