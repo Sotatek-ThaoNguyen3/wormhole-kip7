@@ -21,22 +21,18 @@ module.exports = async function (deployer) {
     // deploy implementation
     await deployer.deploy(BridgeImplementation);
 
-    const address_wormhole = (await Wormhole.deployed()).address
-    console.log("This is address", address_wormhole)
-
     // encode initialisation data
     const setup = new web3.eth.Contract(BridgeSetup.abi, BridgeSetup.address);
     const initData = setup.methods.setup(
         BridgeImplementation.address,
         chainId,
-        address_wormhole,
+        (await Wormhole.deployed()).address,
         governanceChainId,
         governanceContract,
         TokenImplementation.address,
         WETH
     ).encodeABI();
 
-    console.log("Agrument:", BridgeSetup.address, initData)
     // deploy proxy
     await deployer.deploy(TokenBridge, BridgeSetup.address, initData);
 };

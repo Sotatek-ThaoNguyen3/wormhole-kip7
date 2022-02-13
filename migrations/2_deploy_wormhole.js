@@ -5,7 +5,7 @@ const Implementation = artifacts.require("Implementation");
 const Wormhole = artifacts.require("Wormhole");
 
 // CONFIG
-const initialSigners = JSON.parse(process.env.INIT_SIGNERS);
+const initialSigners = process.env.INIT_SIGNERS.split(' ');
 const chainId = process.env.INIT_CHAIN_ID;
 const governanceChainId = process.env.INIT_GOV_CHAIN_ID;
 const governanceContract = process.env.INIT_GOV_CONTRACT; // bytes32
@@ -27,7 +27,6 @@ module.exports = async function (deployer) {
         governanceContract
     ).encodeABI();
 
-    console.log("Agrument:", Setup.address, initData)
     // deploy proxy
-    await deployer.deploy(Wormhole,  Setup.address, initData);
+    await deployer.deploy(Wormhole, Setup.address, initData);
 };

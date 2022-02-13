@@ -32,7 +32,6 @@ module.exports = async function (deployer) {
         pyth2WormholeContract,
     ).encodeABI();
 
-    console.log("Agrument:", PythSetup.address, initData)
     // deploy proxy
     await deployer.deploy(PythDataBridge, PythSetup.address, initData);
 };
