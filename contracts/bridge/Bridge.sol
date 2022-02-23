@@ -120,7 +120,7 @@ contract Bridge is BridgeGovernance {
             uint256 balanceBefore = abi.decode(queriedBalanceBefore, (uint256));
 
             // transfer tokens
-            IKIP7(token).safeTransferFrom(msg.sender, address(this), amount);
+            IKIP7(token).transferFrom(msg.sender, address(this), amount);
 
             // query own token balance after transfer
             (,bytes memory queriedBalanceAfter) = token.staticcall(abi.encodeWithSelector(IKIP7.balanceOf.selector, address(this)));
@@ -129,7 +129,7 @@ contract Bridge is BridgeGovernance {
             // correct amount for potential transfer fees
             amount = balanceAfter - balanceBefore;
         } else {
-            IKIP7(token).safeTransferFrom(msg.sender, address(this), amount);
+            IKIP7(token).transferFrom(msg.sender, address(this), amount);
 
             TokenImplementation(token).burn(address(this), amount);
         }
@@ -306,7 +306,7 @@ contract Bridge is BridgeGovernance {
                     // mint wrapped asset
                     TokenImplementation(address(transferToken)).mint(msg.sender, nativeFee);
                 } else {
-                    transferToken.safeTransfer(msg.sender, nativeFee);
+                    transferToken.transfer(msg.sender, nativeFee);
                 }
             }
         }
@@ -324,7 +324,7 @@ contract Bridge is BridgeGovernance {
                 // mint wrapped asset
                 TokenImplementation(address(transferToken)).mint(transferRecipient, transferAmount);
             } else {
-                transferToken.safeTransfer(transferRecipient, transferAmount);
+                transferToken.transfer(transferRecipient, transferAmount);
             }
         }
     }
